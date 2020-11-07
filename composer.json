@@ -1,0 +1,32 @@
+{
+    "name": "adiliogobira/lifeapps",
+    "description": "Interaction service with the Lifeapps ecommerce platform.",
+    "type": "library",
+    "license": "mit",
+    "authors": [{
+        "name": "Adilio Gobira",
+        "email": "adiliogobira@gmail.com"
+    }],
+    "minimum-stability": "stable",
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Lifeapps\\Integration\\": "src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "8.x-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Laravel\\Scout\\ScoutServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": "^7.2"
+    }
+}
