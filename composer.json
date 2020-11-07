@@ -7,7 +7,8 @@
         "name": "Adilio Gobira",
         "email": "adiliogobira@gmail.com"
     }],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "config": {
         "sort-packages": true
     },
@@ -17,12 +18,9 @@
         }
     },
     "extra": {
-        "branch-alias": {
-            "dev-main": "1.0.0-dev"
-        },
         "laravel": {
             "providers": [
-                "Laravel\\Scout\\ScoutServiceProvider"
+                "Lifeapps\\Integration\\LifeappsServiceProvider"
             ]
         }
     },
