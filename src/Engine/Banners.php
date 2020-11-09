@@ -13,7 +13,7 @@ class Banners extends LifeAppsConnector
      */
     public function getCarrouseu()
     {
-        $this->endPoint = "/v2/app/" . $this->token . "/customizacao/carrossel/list-for-page/" . self::LIFEAPPS_TOKEN_FORNECEDOR;
+        $this->endPoint = "/v2/app/" . $this->token . "/customizacao/carrossel/list-for-page/" . $this->tokenFornecedor;
         $this->get();
         return $this->callback;
     }
@@ -23,7 +23,7 @@ class Banners extends LifeAppsConnector
      */
     public function getBanners()
     {
-        $this->endPoint = "/v2/app/" . $this->token . "/customizacao/carrossel/list-for-page/" . self::LIFEAPPS_TOKEN_FORNECEDOR;
+        $this->endPoint = "/v2/app/" . $this->token . "/customizacao/carrossel/list-for-page/" . $this->tokenFornecedor;
         $this->get();
         return $this->callback;
     }
