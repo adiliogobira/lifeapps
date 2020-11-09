@@ -43,7 +43,7 @@ class Cliente extends LifeAppsConnector
      */
     public function newCliente($idcliente = null, $data = null)
     {
-        $this->endPoint = "/v1/app/" . $this->token . self::LIFEAPPS_TOKEN_SPLIT . "{$idcliente}/usuario";
+        $this->endPoint = "/v1/app/" . $this->token . $this->tokenSplit . "{$idcliente}/usuario";
         $this->params = $data;
         $this->post();
         return $this->callback;
@@ -55,7 +55,7 @@ class Cliente extends LifeAppsConnector
      */
     public function getListCliente($idcliente)
     {
-        $this->endPoint = "/v1/app/" . $this->token . self::LIFEAPPS_TOKEN_SPLIT . "{$idcliente}/cliente";
+        $this->endPoint = "/v1/app/" . $this->token . $this->tokenSplit . "{$idcliente}/cliente";
         $this->get();
         return $this->callback;
     }
@@ -66,7 +66,7 @@ class Cliente extends LifeAppsConnector
      */
     public function getEnderecos($idcliente)
     {
-        $this->endPoint = "/v1/app/" . $this->token . self::LIFEAPPS_TOKEN_SPLIT . "{$idcliente}/enderecos";
+        $this->endPoint = "/v1/app/" . $this->token . $this->tokenSplit . "{$idcliente}/enderecos";
         $this->get();
         return $this->callback;
     }
@@ -78,7 +78,7 @@ class Cliente extends LifeAppsConnector
      */
     public function postEnderecos($idcliente, $endereco)
     {
-        $this->endPoint = "/v1/app/" . $this->token . self::LIFEAPPS_TOKEN_SPLIT . "{$idcliente}/enderecos";
+        $this->endPoint = "/v1/app/" . $this->token . $this->tokenSplit . "{$idcliente}/enderecos";
         $this->params = $endereco;
         $this->post();
         return $this->callback;
@@ -93,7 +93,7 @@ class Cliente extends LifeAppsConnector
      */
     public function conditionEndereco($idcliente, $idendereco, $endereco, $action = 'excluir')
     {
-        $this->endPoint = "/v1/app/" . $this->token . self::LIFEAPPS_TOKEN_SPLIT . "{$idcliente}/cliente/enderecos/{$idendereco}/{$action}";
+        $this->endPoint = "/v1/app/" . $this->token . $this->tokenSplit . "{$idcliente}/cliente/enderecos/{$idendereco}/{$action}";
         $this->params = $endereco;
         $this->post();
         return $this->callback;
@@ -126,7 +126,7 @@ class Cliente extends LifeAppsConnector
      */
     public function configClient($idcliente)
     {
-        $this->endPoint = "/v2/app/" . $this->token . self::LIFEAPPS_TOKEN_SPLIT . $idcliente . "/get-configuracoes-cliente";
+        $this->endPoint = "/v2/app/" . $this->token . $this->tokenSplit . $idcliente . "/get-configuracoes-cliente";
         $this->get();
         return $this->callback;
     }
