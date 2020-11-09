@@ -3,10 +3,8 @@
 
 namespace Lifeapps\Integration\Engine;
 
-use App\Helper\CartDispach;
 use App\Setting;
 use Illuminate\Support\Facades\Session;
-use App\Helper\GetConfig;
 
 /**
  * Class Carrinho
@@ -20,10 +18,11 @@ class Carrinho extends LifeAppsConnector
      */
     public function getCarrinho()
     {
+
         $pagamento = new Pagamento();
         $formadepagamento = $pagamento->formPayment(Session::get("idcliente"))[0]->idformapagto;
         $idcliente = (Session::has("idcliente") ? Session::get('idcliente') : null);
-        $this->endPoint = "/v2/app/" . $this->token . "" . self::LIFEAPPS_TOKEN_SPLIT . "{$idcliente}/usuario/{$idcliente}/cart?idformapagamento={$formadepagamento}&idfornecedor=" . self::LIFEAPPS_TOKEN_FORNECEDOR . "&idtipoassinatura=";
+        $this->endPoint = "/v2/app/" . $this->token . "" . $this->tokenSplit . "{$idcliente}/usuario/{$idcliente}/cart?idformapagamento={$formadepagamento}&idfornecedor=" . $this->tokenFornecedor . "&idtipoassinatura=";
         $this->get();
         return $this->callback;
     }
@@ -37,7 +36,7 @@ class Carrinho extends LifeAppsConnector
     {
         $pagamento = Setting::all()->first();
         $formadepagamento = $pagamento->idformapagto;
-        $this->endPoint = "/v2/app/" . $this->token . "" . self::LIFEAPPS_TOKEN_SPLIT . "{$idcliente}/usuario/{$idcliente}/cart?idfornecedor=" . self::LIFEAPPS_TOKEN_FORNECEDOR . "&idformapagamento={$formadepagamento}&modoRepeticaoPedido=false&idtipoassinatura=";
+        $this->endPoint = "/v2/app/" . $this->token . "" . $this->tokenSplit . "{$idcliente}/usuario/{$idcliente}/cart?idfornecedor=" . $this->tokenFornecedor . "&idformapagamento={$formadepagamento}&modoRepeticaoPedido=false&idtipoassinatura=";
         $this->params = $json;
         $this->post();
         return $this->callback;
@@ -107,7 +106,7 @@ class Carrinho extends LifeAppsConnector
 
     public function cupomDesconto($codigo, $idcliente)
     {
-        $this->endPoint = "/v2/app/cupom-desconto/validar-desconto/fornecedor/" . self::LIFEAPPS_TOKEN_FORNECEDOR . "/cliente/{$idcliente}/cupom/{$codigo}";
+        $this->endPoint = "/v2/app/cupom-desconto/validar-desconto/fornecedor/" . $this->tokenFornecedor . "/cliente/{$idcliente}/cupom/{$codigo}";
         $this->get();
         return $this->callback;
     }
