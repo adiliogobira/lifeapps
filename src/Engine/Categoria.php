@@ -16,7 +16,7 @@ class Categoria extends LifeAppsConnector
      */
     public function getCategorias()
     {
-        $this->endPoint = "/v2/app/sometoken/listacategoriasprodutos/" . self::LIFEAPPS_TOKEN_FORNECEDOR . "?idsegmento=" . self::LIFEAPPS_SEGMENT . "&device=desktop";
+        $this->endPoint = "/v2/app/sometoken/listacategoriasprodutos/" . $this->tokenFornecedor . "?idsegmento=" . $this->segment . "&device=desktop";
         return $this;
     }
 
@@ -26,7 +26,7 @@ class Categoria extends LifeAppsConnector
      */
     public function getDadosCategoria($slug)
     {
-        $this->endPoint = "/v2/app/setores-produto/obter-setor/" . self::LIFEAPPS_TOKEN_FORNECEDOR . "/{$slug}";
+        $this->endPoint = "/v2/app/setores-produto/obter-setor/" . $this->tokenFornecedor . "/{$slug}";
         $this->get();
         return $this->callback;
     }
@@ -36,7 +36,7 @@ class Categoria extends LifeAppsConnector
      */
     public function getDepartamento()
     {
-        $this->endPoint = "/v2/app/sometoken/listacategoriasprodutos/" . self::LIFEAPPS_TOKEN_FORNECEDOR . "?idsegmento=" . self::LIFEAPPS_SEGMENT . "&device=desktop";
+        $this->endPoint = "/v2/app/sometoken/listacategoriasprodutos/" . $this->tokenFornecedor . "?idsegmento=" . $this->segment . "&device=desktop";
         $this->get();
         return $this->callback;
     }
