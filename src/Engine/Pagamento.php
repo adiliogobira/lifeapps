@@ -20,7 +20,7 @@ class Pagamento extends LifeAppsConnector
     public function formPayment($idcliente = null)
     {
         $cliente = ($idcliente ?? "?idcliente={$idcliente}");
-        $this->endPoint .= "/v2/app/" . $this->token . "/fornecedor/" . self::LIFEAPPS_TOKEN_FORNECEDOR . "/formas-pagamento{$cliente}";
+        $this->endPoint .= "/v2/app/" . $this->token . "/fornecedor/" . $this->tokenFornecedor . "/formas-pagamento{$cliente}";
         $this->get();
         return $this->callback;
     }
