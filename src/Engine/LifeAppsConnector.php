@@ -13,17 +13,22 @@ abstract class LifeAppsConnector
     protected $callback;
     protected $dispach;
     protected $token;
-    public const LIFEAPPS_API_URL = env('LIFE_APPS_URL');
-    public const LIFEAPPS_TOKEN_FORNECEDOR = env('LIFE_APPS_FORNECEDOR');
-    public const LIFEAPPS_TOKEN_SPLIT = env('LIFE_APPS_TOKEN_SPLIT');
-    public const LIFEAPPS_SEGMENT = "ccc4ce04-2c6a-4364-b42a-898ad83d1878";
+
+    public $apiUrl;
+    public $tokenFornecedor;
+    public $tokenSplit;
+    public $segment;
 
     public function __construct()
     {
-        $vendor = self::LIFEAPPS_TOKEN_FORNECEDOR;
-        $this->header = [
+        $this->apiUrl = config('lifeapps.LIFE_APPS_URL');
+        $this->tokenFornecedor = config('lifeapps.LIFE_APPS_FORNECEDOR');
+        $this->tokenSplit = config('lifeapps.LIFE_APPS_TOKEN_SPLIT');
+        $this->segment = 'ccc4ce04-2c6a-4364-b42a-898ad83d1878';
+
+        $this->headers = [
             'Content-Type: application/json',
-            "X-idfornecedor: ['{$vendor}']"
+            "X-idfornecedor: ['{$this->tokenFornecedor}']"
         ];
 
         if (!Session::has('token')) {
@@ -38,7 +43,7 @@ abstract class LifeAppsConnector
     {
         $curl = curl_init();
         curl_setopt_array($curl, [
-            CURLOPT_URL => self::LIFEAPPS_API_URL . $this->endPoint,
+            CURLOPT_URL => $this->apiUrl . $this->endPoint,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 120,
@@ -55,7 +60,7 @@ abstract class LifeAppsConnector
     {
         $curl = curl_init();
         curl_setopt_array($curl, [
-            CURLOPT_URL => self::LIFEAPPS_API_URL . $this->endPoint,
+            CURLOPT_URL => $this->apiUrl . $this->endPoint,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 120,
