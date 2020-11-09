@@ -28,7 +28,7 @@ abstract class LifeAppsConnector
 
         $this->headers = [
             'Content-Type: application/json',
-            "X-idfornecedor: ['{$this->tokenFornecedor}']"
+            'X-idfornecedor: ["' . $this->tokenFornecedor . '"]'
         ];
 
         if (!Session::has('token')) {
@@ -58,6 +58,7 @@ abstract class LifeAppsConnector
 
     protected function get()
     {
+        //die($this->apiUrl . $this->endPoint);
         $curl = curl_init();
         curl_setopt_array($curl, [
             CURLOPT_URL => $this->apiUrl . $this->endPoint,
@@ -68,7 +69,9 @@ abstract class LifeAppsConnector
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => $this->headers,
         ]);
-        $this->callback = json_decode(curl_exec($curl));
+        $this->callback = (curl_exec($curl));
+        var_dump($this->callback);
+        die;
         curl_close($curl);
     }
 
@@ -85,6 +88,7 @@ abstract class LifeAppsConnector
             CURLOPT_CUSTOMREQUEST => "GET",
         ]);
         $this->callback = json_decode(curl_exec($curl));
+
         curl_close($curl);
     }
 }
