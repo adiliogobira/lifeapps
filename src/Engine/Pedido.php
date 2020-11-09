@@ -20,7 +20,7 @@ class Pedido extends LifeAppsConnector
      */
     public function formaEntrega($idcliente = null, $idendereco = null, $formadepagamento = null, $type = "DELIVERY")
     {
-        $this->endPoint = "/v4/app/" . $this->token . self::LIFEAPPS_TOKEN_SPLIT . $idcliente . "/formas-entrega/" . self::LIFEAPPS_TOKEN_FORNECEDOR . "?tipoEntrega={$type}&idendereco={$idendereco}&idformapagamento={$formadepagamento}";
+        $this->endPoint = "/v4/app/" . $this->token . $this->tokenSplit . $idcliente . "/formas-entrega/" . $this->tokenFornecedor . "?tipoEntrega={$type}&idendereco={$idendereco}&idformapagamento={$formadepagamento}";
         $this->get();
         return $this->callback;
     }
@@ -32,7 +32,7 @@ class Pedido extends LifeAppsConnector
      */
     public function pedidoSubmit($idcliente, $pedido)
     {
-        $this->endPoint = "/v2/app/" . self::LIFEAPPS_TOKEN_FORNECEDOR . "/usuario/{$idcliente}/pedido";
+        $this->endPoint = "/v2/app/" . $this->tokenFornecedor . "/usuario/{$idcliente}/pedido";
         $this->params = $pedido;
         $this->post();
         return $this->callback;
