@@ -4,6 +4,7 @@ namespace Lifeapps\Integration\Engine;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
+use Ramsey\Uuid\Nonstandard\Uuid;
 
 abstract class LifeAppsConnector
 {
@@ -33,7 +34,7 @@ abstract class LifeAppsConnector
         ];
 
         if (!Session::has('token')) {
-            Session::put(['token' => Str::uuid()]);
+            Session::put(['token' => (string)Str::uuid()]);
             Session::save();
         }
 
