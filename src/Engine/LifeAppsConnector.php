@@ -33,7 +33,7 @@ abstract class LifeAppsConnector
         ];
 
         if (!Session::has('token')) {
-            Session::put(['token' => Str::uuid()->uuid]);
+            Session::put(['token' => Str::uuid()]);
             Session::save();
         }
 
