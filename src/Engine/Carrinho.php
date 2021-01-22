@@ -16,11 +16,8 @@ class Carrinho extends LifeAppsConnector
     /**
      * @return mixed
      */
-    public function getCarrinho()
+    public function getCarrinho($formadepagamento)
     {
-
-        $pagamento = new Pagamento();
-        $formadepagamento = $pagamento->formPayment(Session::get("idcliente"))[0]->idformapagto;
         $idcliente = (Session::has("idcliente") ? Session::get('idcliente') : null);
         $this->endPoint = "/v2/app/" . $this->token . "" . $this->tokenSplit . "{$idcliente}/usuario/{$idcliente}/cart?idformapagamento={$formadepagamento}&idfornecedor=" . $this->tokenFornecedor . "&idtipoassinatura=";
         $this->get();
@@ -32,10 +29,8 @@ class Carrinho extends LifeAppsConnector
      * @param $idcliente
      * @return mixed
      */
-    public function adicionar($json, $idcliente)
+    public function adicionar($json, $idcliente, $formadepagamento)
     {
-        $pagamento = Setting::all()->first();
-        $formadepagamento = $pagamento->idformapagto;
         $this->endPoint = "/v2/app/" . $this->token . "" . $this->tokenSplit . "{$idcliente}/usuario/{$idcliente}/cart?idfornecedor=" . $this->tokenFornecedor . "&idformapagamento={$formadepagamento}&modoRepeticaoPedido=false&idtipoassinatura=";
         $this->params = $json;
         $this->post();
