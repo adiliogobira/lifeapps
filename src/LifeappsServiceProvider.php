@@ -20,5 +20,6 @@ class LifeappsServiceProvider extends ServiceProvider
                 __DIR__ . '/../config/lifeapps.php' => $this->app['path.config'] . DIRECTORY_SEPARATOR . 'lifeapps.php',
             ]);
         }
+        
     }
 }
