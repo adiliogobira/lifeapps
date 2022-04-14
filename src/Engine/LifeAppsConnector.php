@@ -43,8 +43,7 @@ abstract class LifeAppsConnector
 
     protected function post()
     {
-        $curl = curl_init();
-        curl_setopt_array($curl, [
+        $option = [
             CURLOPT_URL => $this->apiUrl . $this->endPoint,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_MAXREDIRS => 10,
@@ -53,15 +52,13 @@ abstract class LifeAppsConnector
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => json_encode($this->params),
             CURLOPT_HTTPHEADER => $this->headers,
-        ]);
-        $this->callback = json_decode(curl_exec($curl));
-        curl_close($curl);
+        ];
+        $this->execute($option);
     }
 
     protected function get()
     {
-        $curl = curl_init();
-        curl_setopt_array($curl, [
+        $option = [
             CURLOPT_URL => $this->apiUrl . $this->endPoint,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_MAXREDIRS => 10,
@@ -69,23 +66,28 @@ abstract class LifeAppsConnector
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => $this->headers,
-        ]);
-        $this->callback = json_decode(curl_exec($curl));
-        curl_close($curl);
+        ];
+        $this->execute($option);
     }
 
     protected function getWin($endpoint)
     {
-        set_time_limit(0);
-        $curl = curl_init();
-        curl_setopt_array($curl, [
+        $option = [
             CURLOPT_URL => $endpoint,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
-        ]);
+        ];
+        $this->execute($option);
+    }
+    
+    private function execute(array $args)
+    {
+        set_time_limit(0);
+        $curl = curl_init();
+        curl_setopt_array($curl, $args);
         $this->callback = json_decode(curl_exec($curl));
         curl_close($curl);
     }
