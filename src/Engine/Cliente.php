@@ -13,13 +13,16 @@ use Illuminate\Support\Facades\Session;
 class Cliente extends LifeAppsConnector
 {
 
+    public function __costruct(){
+        $this->endPoint = "/v2/app/";
+    }
     /**
      * @param $usuario
      * @return mixed
      */
     public function getClientByLogin($usuario)
     {
-        $this->endPoint = "/v2/app/" . $this->token . "/usuario/{$usuario}";
+        $this->endPoint .= "/v2/app/" . $this->token . "/usuario/{$usuario}";
         $this->get();
         return $this->callback;
     }
@@ -115,7 +118,7 @@ class Cliente extends LifeAppsConnector
      */
     public function authRecorver($idcliente)
     {
-        $this->endPoint = "/v2/app/" . $this->token . "/cliente/senha/recuperar/{$idcliente}";
+        $this->endPoint .= $this->token . "/cliente/senha/recuperar/{$idcliente}";
         $this->get();
         return $this->callback;
     }
@@ -126,7 +129,7 @@ class Cliente extends LifeAppsConnector
      */
     public function configClient($idcliente)
     {
-        $this->endPoint = "/v2/app/" . $this->token . $this->tokenSplit . $idcliente . "/get-configuracoes-cliente";
+        $this->endPoint .= $this->token . $this->tokenSplit . $idcliente . "/get-configuracoes-cliente";
         $this->get();
         return $this->callback;
     }
